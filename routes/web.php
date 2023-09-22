@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+//Route::get('/', function () {
+//    return view('welcome');})->name('welcome');
+
+Route::get('/', [BooksController::class, 'welcome'])->name('welcome');
+
 
 Route::middleware([
     'auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {

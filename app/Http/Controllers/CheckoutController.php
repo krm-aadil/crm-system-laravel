@@ -8,7 +8,7 @@ use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class CheckoutController extends Controller
 {
     public function processCheckout(Request $request)
@@ -35,22 +35,26 @@ class CheckoutController extends Controller
             // Add the current item's total amount to the overall order total
             $orderTotal += $totalAmountForItem;
 
-            Order::create([
-                'user_id' => $user->id,
-                'book_id' => $cartItem->book_id,
-                'quantity' => $cartItem->quantity,
-                'customer_name' => $request->input('customer_name'),
-                'customer_email' => $request->input('customer_email'),
-                'customer_address' => $request->input('customer_address'),
-                'customer_phone' => $request->input('customer_phone'),
-                'payment_method' => $request->input('payment_method'),
-                'total_amount' => $totalAmountForItem, // Store the total amount for the current item
-            ]);
+            // Check if there's enough quantity in stock
+            if ($book->quantity >= $cartItem->quantity) {
+                // Create an order
+                Order::create([
+                    'user_id' => $user->id,
+                    'book_id' => $cartItem->book_id,
+                    'quantity' => $cartItem->quantity,
+                    'customer_name' => $request->input('customer_name'),
+                    'customer_email' => $request->input('customer_email'),
+                    'customer_address' => $request->input('customer_address'),
+                    'customer_phone' => $request->input('customer_phone'),
+                    'payment_method' => $request->input('payment_method'),
+                    'total_amount' => $totalAmountForItem,
+                ]);
 
-            // Ensure that there is a stock record for the book
-            if ($book->stock) {
                 // Update the stock quantity of the book
-                $book->stock->decrement('quantity', $cartItem->quantity);
+                $book->decrement('quantity', $cartItem->quantity);
+            } else {
+                // Handle insufficient quantity (e.g., display an error message)
+                return redirect()->back()->with('error', 'Insufficient quantity in stock for ' . $book->title);
             }
 
             // Remove the cart item
@@ -59,10 +63,9 @@ class CheckoutController extends Controller
 
         // Now, $orderTotal contains the overall total amount for the order
 
-
-
         return redirect()->route('user.dashboard')->with('success', 'Checkout successful.');
     }
+
 
     // Add methods for viewing and managing orders as needed
 }

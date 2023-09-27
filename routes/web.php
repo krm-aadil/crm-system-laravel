@@ -83,6 +83,8 @@ Route::put('/books/{book}', [BooksController::class, 'update'])->name('books.upd
 // Route to delete a book
 Route::delete('/books/{book}', [BooksController::class, 'destroy'])->name('books.destroy');
 
+//Route to a single book
+Route::get('/books/{book}', [BooksController::class, 'show'])->name('books.show');
 
 
 //checkout routes
@@ -91,3 +93,9 @@ Route::middleware([
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 });
+
+
+
+Route::get('/cart/update/{cartItemId}', [CartController::class,'updateCartItem'])->name('cart.update');
+Route::delete('cart/remove/{cartItemId}', [CartController::class, 'removeCartItem'])->name('cart.remove');
+Route::get('cart/count', [CartController::class, 'getCartCount'])->name('cart.count');

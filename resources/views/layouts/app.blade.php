@@ -14,6 +14,12 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @vite('resources/css/app.css')
+        @include('sweetalert::alert')
+        <!-- Include SweetAlert CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+        <!-- Include SweetAlert JS -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         <!-- Styles -->
         @livewireStyles

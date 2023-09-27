@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,7 +50,13 @@ class HomeController extends Controller
     public function user_dashboard()
     {
         $user = Auth::user();
+
+        // Fetch the user's purchase history from the Order model
+        $purchaseHistory = Order::where('user_id', $user->id)->get();
+
+        // Fetch the cart items (if needed)
         $cartItems = Cart::where('user_id', $user->id)->get();
-        return view('user.dashboard', compact('cartItems'));
+
+        return view('user.dashboard', compact('purchaseHistory', 'cartItems'));
     }
 }

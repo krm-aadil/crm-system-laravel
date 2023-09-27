@@ -113,4 +113,9 @@ class BooksController extends Controller
 
         return view('welcome',compact('books','cartItems') );
     }
+
+    public function show(Book $book)
+    {
+        return view('books.show', compact('book'));
+    }
 }

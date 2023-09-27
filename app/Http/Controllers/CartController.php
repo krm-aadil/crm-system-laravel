@@ -20,7 +20,7 @@ class CartController extends Controller
         $user = Auth::user();
 
         // Check if the book is already in the user's cart
-        $existingCartItem = $user->carts->where('book_id', $book->id)->first();
+        $existingCartItem = Cart::where('user_id', $user->id)->where('book_id', $book->id)->first();
 
         if ($existingCartItem) {
             // If the book is already in the cart, increment its quantity
@@ -37,26 +37,8 @@ class CartController extends Controller
             $cartItem->save();
         }
 
-        // Retrieve the cart from the session
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$book->id])) {
-            // If the book is already in the session cart, increment its quantity
-            $cart[$book->id]['quantity']++;
-        } else {
-            // If the book is not in the session cart, add it
-            $cart[$book->id] = [
-                'book_id' => $book->id,
-                'quantity' => 1,
-            ];
-        }
-
-        // Store the updated cart back in the session
-        session()->put('cart', $cart);
-
         return response()->json(['success' => true, 'message' => 'Book added to cart successfully']);
     }
-
 
     public function viewCart()
     {
@@ -67,33 +49,51 @@ class CartController extends Controller
         return view('dashboard', compact('cartItems'));
     }
 
-    public function updateCart(Request $request)
+    public function updateCartItem(Request $request, $cartItemId)
     {
-        // Update the cart items' quantities based on the form input
         $user = Auth::user();
-        $data = $request->validate([
-            'quantity.*' => 'required|numeric|min:1',
+        $cartItem = Cart::find($cartItemId);
+
+        if (!$cartItem || $cartItem->user_id !== $user->id) {
+            return response()->json(['message' => 'Cart item not found.'], 404);
+        }
+
+        // Validate the request
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
         ]);
 
-        foreach ($data['quantity'] as $cartItemId => $quantity) {
-            $cartItem = Cart::findOrFail($cartItemId);
-            $cartItem->update(['quantity' => $quantity]);
-        }
+        // Update the cart item's quantity
+        $cartItem->quantity = $request->input('quantity');
+        $cartItem->save();
 
-        return redirect()->back()->with('success', 'Cart updated successfully.');
+        // You can also recalculate the total cart amount here if needed
+
+        return response()->json(['message' => 'Cart item updated successfully']);
     }
 
-    public function removeFromCart(Book $book)
+    public function removeCartItem(Request $request, $cartItemId)
     {
-        // Remove an item from the cart
         $user = Auth::user();
-        $cartItem = Cart::where('user_id', $user->id)->where('book_id', $book->id)->first();
+        $cartItem = Cart::find($cartItemId);
 
-        if ($cartItem) {
-            $cartItem->delete();
+        if (!$cartItem || $cartItem->user_id !== $user->id) {
+            return response()->json(['message' => 'Cart item not found.'], 404);
         }
 
-        return redirect()->back()->with('success', 'Item removed from cart.');
+        // Remove the cart item
+        $cartItem->delete();
+
+        // You can also recalculate the total cart amount here if needed
+
+        return response()->json(['message' => 'Cart item removed successfully']);
     }
 
+
+    public function getCartCount()
+    {
+        $cartCount = Cart::where('user_id', auth()->id())->count();
+
+        return response()->json(['cartCount' => $cartCount]);
+    }
 }

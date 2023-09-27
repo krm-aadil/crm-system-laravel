@@ -3,12 +3,32 @@
 
     <div x-data="{ cartOpen: false }">
         <!-- Cart button -->
-        <div class="px-4 py-2 absolute right-0 top-0">
+        <div class="px-4 py-2 absolute right-0 top-0 flex items-center">
+
+            <!-- Cart Button -->
             <button @click="cartOpen = !cartOpen" class="btn btm-outline-dark px">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 Cart <span class="badge badge-pill badge-dark" id="cart-count">0</span>
             </button>
+
+            <!-- Login/Register/Dashboard Links -->
+            <div class="navbar-end top-0 right-0 ml-4">
+                @if (Route::has('login'))
+                    <div class="flex">
+                        @auth
+                            <a href="{{ route('user.dashboard') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Dashboard</a>
+                        @else
+                            <a href="{{ route('login') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary ">Log in</a>
+
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="ml-4 font-semibold text-primary hover:text-secondary focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+            </div>
         </div>
+
 
 
         <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">

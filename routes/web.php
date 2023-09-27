@@ -86,6 +86,8 @@ Route::delete('/books/{book}', [BooksController::class, 'destroy'])->name('books
 //Route to a single book
 Route::get('/books/{book}', [BooksController::class, 'show'])->name('books.show');
 
+//Route to search all books
+Route::get('/search', [BooksController::class, 'search'])->name('books.search');
 
 //checkout routes
 Route::middleware([

@@ -67,40 +67,7 @@
             </div>
         </div>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="container">
-        <div class="container mx-auto px-6 mt-8">
-            <div class="flex">
-                <div class="w-1/2">
-                    <img src="{{ asset('storage/' . $book->CoverImage) }}" alt="{{ $book->title }}" class="w-full h-auto rounded-lg shadow-lg">
-                </div>
-                <div class="w-1/2 ml-6">
-                    <h2 class="text-3xl font-semibold mb-2">{{ $book->title }}</h2>
-                    <p class="text-gray-600">Author: {{ $book->author->first_name }} {{ $book->author->last_name }}</p>
-                    <p class="text-gray-600">Genre: {{ $book->genre->genre_name }}</p>
-                    <p class="text-gray-600">Language: {{ $book->language->language_name }}</p>
-                    <p class="text-gray-600">Price: ${{ $book->price }}</p>
-                    <p class="text-gray-600">Quantity in Stock: {{ $book->quantity }}</p>
-                    <p class="text-gray-600">ISBN: {{ $book->ISBN }}</p>
-                    <p class="text-gray-600 mt-4">Summary:</p>
-                    <p class="text-gray-800">{{ $book->summary }}</p>
 
-                    <!-- Add to Cart Form -->
-                    <form id="addToCartForm{{ $book->id }}" data-book-id="{{ $book->id }}" action="{{ route('cart.add', ['book' => $book->id]) }}" method="POST">
-                        @csrf
-                        <button type="button" class="mt-6 px-6 py-3 bg-violet-600 text-white text-lg uppercase font-medium rounded-lg hover:bg-violet-500 focus:outline-none focus:bg-violet-500" onclick="addToCart({{ $book->id }})">
-                            Add to Cart
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <script>
             function updateCartCount() {
                 // Send an AJAX request to get the cart count from the database

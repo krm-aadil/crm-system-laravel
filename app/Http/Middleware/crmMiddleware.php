@@ -12,7 +12,7 @@ class crmMiddleware
         $user = auth()->user();
 
         if (!$user || !in_array($user->role, ['crm', 'admin','user'])) {
-            abort(403, 'Unauthorized');
+            redirect()->route('login');
         }
 
         return $next($request);

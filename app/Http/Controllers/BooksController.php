@@ -121,4 +121,13 @@ class BooksController extends Controller
         $cartItems = Cart::with('book')->where('user_id', $userId)->get();
         return view('books.show', compact('book','books','cartItems'));
     }
+
+
+    public function search()
+    {
+        $books = Book::all();
+        $userId = Auth::id(); // Get the authenticated user's ID
+        $cartItems = Cart::with('book')->where('user_id', $userId)->get();
+        return view('books.search', compact('books','cartItems'));
+    }
 }

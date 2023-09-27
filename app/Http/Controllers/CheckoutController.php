@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Stock;
+use App\Notifications\OrderPlaced;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +39,7 @@ class CheckoutController extends Controller
             // Check if there's enough quantity in stock
             if ($book->quantity >= $cartItem->quantity) {
                 // Create an order
-                Order::create([
+                $order=Order::create([
                     'user_id' => $user->id,
                     'book_id' => $cartItem->book_id,
                     'quantity' => $cartItem->quantity,
@@ -49,6 +50,8 @@ class CheckoutController extends Controller
                     'payment_method' => $request->input('payment_method'),
                     'total_amount' => $totalAmountForItem,
                 ]);
+                $user->notify(new OrderPlaced($order));
+
 
                 // Update the stock quantity of the book
                 $book->decrement('quantity', $cartItem->quantity);

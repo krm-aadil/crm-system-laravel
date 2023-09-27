@@ -68,6 +68,9 @@
         </div>
 
 
+
+
+
         <script>
             function updateCartCount() {
                 // Send an AJAX request to get the cart count from the database

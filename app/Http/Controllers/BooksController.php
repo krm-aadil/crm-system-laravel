@@ -123,11 +123,17 @@ class BooksController extends Controller
     }
 
 
-    public function search()
+    public function search(Request $request)
     {
-        $books = Book::all();
+        $query = $request->input('query');
+
+        // Perform a search query using the 'title' field
+        $results = Book::where('title', 'like', '%' . $query . '%')->get();
+
         $userId = Auth::id(); // Get the authenticated user's ID
         $cartItems = Cart::with('book')->where('user_id', $userId)->get();
-        return view('books.search', compact('books','cartItems'));
+
+        return view('books.search', compact('results', 'cartItems'));
     }
+
 }

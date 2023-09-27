@@ -16,9 +16,13 @@
                 @if (Route::has('login'))
                     <div class="flex">
                         @auth
-                            <a href="{{ route('user.dashboard') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Dashboard</a>
+                            @if(auth()->user()->role == 'admin')
+                                <a href="{{ route('admin.dashboard') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Dashboard</a>
+                            @else
+                                <a href="{{ route('user.dashboard') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Dashboard</a>
+                            @endif
                         @else
-                            <a href="{{ route('login') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary ">Log in</a>
+                            <a href="{{ route('login') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Log in</a>
 
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="ml-4 font-semibold text-primary hover:text-secondary focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Register</a>
@@ -27,6 +31,7 @@
                     </div>
                 @endif
             </div>
+
         </div>
 
 

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Cart;
 use App\Models\Genre;
 use App\Models\Language;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class BooksController extends Controller
 {
@@ -47,6 +50,8 @@ class BooksController extends Controller
             'author_id' => 'required|exists:authors,id',
             'genre_id' => 'required|exists:genres,id',
             'language_id' => 'required|exists:languages,id',
+            'quantity' => 'required|numeric',
+
         ]);
 
         // Handle file upload if an image is provided
@@ -78,6 +83,8 @@ class BooksController extends Controller
             'author_id' => 'required|exists:authors,id',
             'genre_id' => 'required|exists:genres,id',
             'language_id' => 'required|exists:languages,id',
+            'quantity' => 'required|numeric',
+
         ]);
 
         // Handle file upload if an image is provided
@@ -101,6 +108,9 @@ class BooksController extends Controller
     public function welcome()
     {
         $books = Book::all();
-        return view('welcome', compact('books'));
+        $userId = Auth::id(); // Get the authenticated user's ID
+        $cartItems = Cart::with('book')->where('user_id', $userId)->get();
+
+        return view('welcome',compact('books','cartItems') );
     }
 }

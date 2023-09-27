@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -52,9 +56,13 @@ Route::get('crm/dashboard', function () {
 
 
 //USER ROUTES
-Route::get('user/dashboard', function () {
-    return view('user.dashboard');
-})->name('user.dashboard');
+Route::get('user/dashboard', [HomeController::class, 'user_dashboard'])->name('user.dashboard');
+//user cart routes
+
+
+Route::post('add-to-cart/{book}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('cart', [CartController::class, 'viewCart'])->name('cart.view-cart');
+Route::get('remove-from-cart/{book}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
 
 // Route to display a list of books
@@ -74,3 +82,12 @@ Route::put('/books/{book}', [BooksController::class, 'update'])->name('books.upd
 
 // Route to delete a book
 Route::delete('/books/{book}', [BooksController::class, 'destroy'])->name('books.destroy');
+
+
+
+//checkout routes
+Route::middleware([
+    'auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
+});

@@ -21,6 +21,7 @@
                             <th>Author</th>
                             <th>Genre</th>
                             <th>Language</th>
+                            <th>Quantity</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -43,6 +44,8 @@
                                 <td>{{ $book->genre->genre_name }}</td>
                                 <td>{{ $book->language->language_name }}</td>
 
+                                <td>{{$book->quantity}}</td>
+
                                 <td>
                                     <a href="{{ route('books.edit', $book->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                     <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display: inline;">
@@ -51,6 +54,9 @@
                                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                     </form>
                                 </td>
+
+
+
                             </tr>
                         @endforeach
                         </tbody>

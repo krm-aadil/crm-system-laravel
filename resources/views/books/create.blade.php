@@ -65,6 +65,11 @@
                             </select>
                         </div>
 
+                        <div class="mb-4">
+                            <label for="quantity" class="block font-semibold text-gray-700"> Quantity</label>
+                            <input type="number" name="quantity" id="quantity" class="w-full rounded-lg border-gray-300 focus:outline-none focus:border-teal-400" value="{{ old('quantity') }}">
+                        </div>
+
                         <button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded">
                             Create
                         </button>

@@ -32,12 +32,12 @@ module.exports = {
         themes: [
             {
                 mytheme: {
-                    primary: '#009688',
-                    secondary: '#2dd4bf',
-                    accent: '#5eead4',
+                    primary: '#8c0096',
+                    secondary: '#d42dcc',
+                    accent: '#c75eea',
                     neutral: '#064e3b',
                     'base-100': '#ffffff',
-                    info: '#3abff8',
+                    info: '#9c3af8',
                     success: '#36d399',
                     warning: '#fbbd23',
                     error: '#f87272',

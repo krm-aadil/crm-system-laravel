@@ -11,7 +11,7 @@ class crmMiddleware
     {
         $user = auth()->user();
 
-        if (!$user || !in_array($user->role, ['crm', 'admin'])) {
+        if (!$user || !in_array($user->role, ['crm', 'admin','user'])) {
             abort(403, 'Unauthorized');
         }
 

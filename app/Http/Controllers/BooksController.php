@@ -116,6 +116,9 @@ class BooksController extends Controller
 
     public function show(Book $book)
     {
-        return view('books.show', compact('book'));
+        $books = Book::all();
+        $userId = Auth::id(); // Get the authenticated user's ID
+        $cartItems = Cart::with('book')->where('user_id', $userId)->get();
+        return view('books.show', compact('book','books','cartItems'));
     }
 }

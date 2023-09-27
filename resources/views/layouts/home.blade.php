@@ -38,14 +38,14 @@
                 </svg>
                 <span class="mx-1 text-sm">SRILANKA</span>
             </div>
-            <div class="w-full text-gray-700 md:text-center text-2xl font-semibold">
-                LIVRE .
-            </div>
+
+            <a href="{{route('welcome')}}">
+                <div class="w-full text-violet-700 md:text-center text-2xl font-semibold">
+                    LIVRE.
+                </div>
+            </a>
 
             <div class="flex items-center justify-end w-full">
-
-
-
                 <div class="flex sm:hidden">
                     <button @click="isOpen = !isOpen" type="button" class="text-gray-600 hover:text-gray-500 focus:outline-none focus:text-gray-500" aria-label="toggle menu">
                         <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
@@ -54,11 +54,6 @@
                     </button>
 
                 </div>
-
-
-
-
-
             </div >
             <div class="navbar-end">
 

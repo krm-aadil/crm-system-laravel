@@ -3,6 +3,7 @@
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ClickController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\StockController;
@@ -109,3 +110,7 @@ Route::get('/book_orders', [OrdersController::class, 'index'])->name('book-order
 Route::put('/book_orders/{order}', [OrdersController::class, 'updateStatus']);
 
 //Route::post('/send-email-notification', 'OrderController@sendEmailNotification');
+
+
+//analytics
+Route::post('/track-login-button-click', [ClickController::class,'trackClick'])->name('track.login.button.click');

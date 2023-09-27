@@ -22,8 +22,11 @@
                                 <a href="{{ route('user.dashboard') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Dashboard</a>
                             @endif
                         @else
-                            <a href="{{ route('login') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Log in</a>
-
+                            <a href="{{ route('login') }}"
+                               class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary"
+                               @click.prevent="trackLoginButtonClick">
+                                Log in
+                            </a>
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="ml-4 font-semibold text-primary hover:text-secondary focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Register</a>
                             @endif
@@ -247,7 +250,29 @@
                     @endauth
                 }
             </script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+            <script>
+
+
+
+                function trackLoginButtonClick() {
+                    // Make an AJAX request to track the button click
+                    axios.post('{{ route('track.login.button.click') }}')
+                        .then(response => {
+                            // Handle the response, if needed
+                            console.log('Button click tracked successfully.');
+
+                            // Redirect to the login page
+                            window.location.href = '{{ route('login') }}';
+                        })
+                        .catch(error => {
+                            // Handle any errors, if they occur
+                            console.error('Error tracking button click:', error);
+                        });
+                }
+
+            </script>
 
 
 

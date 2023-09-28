@@ -13,7 +13,7 @@ class AdminController extends Controller
 {
     public function analytics()
     {
-// Retrieve the login timestamps
+        // Retrieve the login timestamps
         $loginActivities = Click::all();
 
         // Initialize an array to store login counts by hour
@@ -34,20 +34,12 @@ class AdminController extends Controller
         // Sort the login counts by hour in descending order
         arsort($loginCountsByHour);
 
-
-//        $revenueData = Order::selectRaw('DATE(created_at) as order_date, SUM(total_amount) as revenue')
-//            ->groupBy('order_date')
-//            ->get();
-
-        $revenueData = Order::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(total_amount) as revenue')
-            ->groupBy('year', 'month')
+        // Fetch real revenue data from the database
+        $revenueData = Order::selectRaw('DATE(created_at) as order_date, SUM(total_amount) as revenue')
+            ->groupBy('order_date')
             ->get();
 
-//        $revenueData = Order::selectRaw('YEAR(created_at) as year, SUM(total_amount) as revenue')
-//            ->groupBy('year')
-//            ->get();
-
-        // Get the most sold book title by book ID
+        // Fetch the most sold book and author from the database
         $mostSoldBook = Order::select('book_id')
             ->groupBy('book_id')
             ->orderByRaw('COUNT(*) DESC')
@@ -67,11 +59,49 @@ class AdminController extends Controller
                 $mostSoldAuthor = $author->first_name . ' ' . $author->last_name;
             }
         }
-        //get the most sold author by book ID
 
+        // Prepare data for the revenue chart
         $labels = $revenueData->pluck('order_date')->toArray();
         $revenueValues = $revenueData->pluck('revenue')->toArray();
 
-        return view('admin.dashboard',compact('loginCountsByHour','labels','revenueValues','mostSoldBookTitle','mostSoldAuthor'));
+        // Fetch real data for the "Most Sold Books by Title for Each Month" chart
+        $mostSoldBooksData = Order::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, book_id, COUNT(*) as sold_count')
+            ->groupBy('year', 'month', 'book_id')
+            ->orderByRaw('year DESC, month DESC, sold_count DESC')
+            ->limit(5) // Limit the results to the top 5 most sold books per month
+            ->get();
+
+        // Initialize arrays for labels and datasets
+        $mostSoldBooksLabels = [];
+        $mostSoldBooksDatasets = [];
+
+        // Loop through the fetched data to populate the arrays
+        foreach ($mostSoldBooksData as $item) {
+            $yearMonth = Carbon::create($item->year, $item->month)->format('M Y');
+            $bookTitle = Book::find($item->book_id)->title;
+
+            if (!in_array($yearMonth, $mostSoldBooksLabels)) {
+                $mostSoldBooksLabels[] = $yearMonth;
+            }
+
+            // Check if a dataset for this book title already exists
+            $datasetIndex = array_search($bookTitle, array_column($mostSoldBooksDatasets, 'label'));
+
+            if ($datasetIndex === false) {
+                // If not, create a new dataset
+                $mostSoldBooksDatasets[] = [
+                    'label' => $bookTitle,
+                    'data' => [$item->sold_count], // Initialize with the count for this month
+                    'backgroundColor' => 'rgba(75, 192, 192, 0.2)', // Customize the dataset's appearance
+                    'borderColor' => 'rgba(75, 192, 192, 1)',
+                    'borderWidth' => 1,
+                ];
+            } else {
+                // If it exists, add the count to the existing dataset
+                $mostSoldBooksDatasets[$datasetIndex]['data'][] = $item->sold_count;
+            }
+        }
+
+        return view('admin.dashboard', compact('loginCountsByHour', 'labels', 'revenueValues', 'mostSoldBookTitle', 'mostSoldAuthor', 'mostSoldBooksLabels', 'mostSoldBooksDatasets'));
     }
 }

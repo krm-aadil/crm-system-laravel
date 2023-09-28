@@ -32,21 +32,75 @@
                             </div>
                         </div>
                     </div>
-                    <div id="revenue-chart"></div>
+                    <div id="revenue-chart-container" class="mb-8">
+                        <h2 class="text-lg font-semibold">Revenue Chart</h2>
+                        <canvas id="revenue-chart"></canvas>
+                    </div>
+
+                    <div id="most-sold-books-chart-container" class="mb-8">
+                        <h2 class="text-lg font-semibold">Most Sold Books by Title for Each Month</h2>
+                        <canvas id="most-sold-books-chart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Revenue Chart Script -->
     <script>
-        var data = {
+        var revenueData = {
             labels: {!! json_encode($labels) !!},
-            series: [
-                {!! json_encode($revenueValues) !!}
-            ]
+            datasets: [{
+                label: 'Revenue',
+                data: {!! json_encode($revenueValues) !!},
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Customize the chart's appearance
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+            }],
         };
-        var options = {
+
+        var revenueOptions = {
             // Customize chart options as needed
         };
-        new Chartist.Line('#revenue-chart', data, options);
+
+        var revenueCtx = document.getElementById('revenue-chart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'line', // Use 'bar' for bar chart, or other types as needed
+            data: revenueData,
+            options: revenueOptions,
+        });
+    </script>
+
+    <!-- Most Sold Books Chart Script -->
+    <script>
+        var mostSoldBooksData = {
+            labels: {!! json_encode($mostSoldBooksLabels) !!},
+            datasets: {!! json_encode($mostSoldBooksDatasets) !!}
+        };
+
+        var mostSoldBooksOptions = {
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            },
+            responsive: true
+        };
+
+        var mostSoldBooksCtx = document.getElementById('most-sold-books-chart').getContext('2d');
+
+        if (mostSoldBooksData.labels.length === 0 || mostSoldBooksData.datasets.length === 0) {
+            // Log an error message if the data is empty
+            console.error('Most Sold Books data is empty or not properly formatted.');
+        } else {
+            new Chart(mostSoldBooksCtx, {
+                type: 'bar',
+                data: mostSoldBooksData,
+                options: mostSoldBooksOptions
+            });
+        }
     </script>
 @endsection

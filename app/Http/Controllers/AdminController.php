@@ -8,9 +8,30 @@ use App\Models\Click;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+
+    public function getUsersCount()
+    {
+        $totalUsersCount = DB::table('users')->count();
+        return $totalUsersCount;
+    }
+
+    public function getUsersAgeGroupsCount()
+    {
+        $now = now();
+        $userCounts = [
+            '1-15' => DB::table('users')->whereRaw("TIMESTAMPDIFF(YEAR, birthdate, '{$now}') BETWEEN 1 AND 15")->count(),
+            '15-20' => DB::table('users')->whereRaw("TIMESTAMPDIFF(YEAR, birthdate, '{$now}') BETWEEN 15 AND 20")->count(),
+            '20-40' => DB::table('users')->whereRaw("TIMESTAMPDIFF(YEAR, birthdate, '{$now}') BETWEEN 20 AND 40")->count(),
+            '40-100' => DB::table('users')->whereRaw("TIMESTAMPDIFF(YEAR, birthdate, '{$now}') BETWEEN 40 AND 100")->count(),
+        ];
+
+        return $userCounts;
+    }
+
     public function analytics()
     {
         // Retrieve the login timestamps
@@ -39,25 +60,32 @@ class AdminController extends Controller
             ->groupBy('order_date')
             ->get();
 
-        // Fetch the most sold book and author from the database
+        // Fetch the most sold book and author from the database, including the cover image path
         $mostSoldBook = Order::select('book_id')
+            ->with(['book' => function ($query) {
+                $query->select('id', 'title', 'author_id', 'CoverImage'); // Include the cover_image field
+            }])
             ->groupBy('book_id')
             ->orderByRaw('COUNT(*) DESC')
             ->first();
 
         $mostSoldBookTitle = '';
         $mostSoldAuthor = '';
+        $mostSoldBookCover = ''; // Initialize the cover image path
 
         if ($mostSoldBook) {
-            $mostSoldBookTitle = Book::find($mostSoldBook->book_id)->title;
+            $mostSoldBookTitle = $mostSoldBook->book->title;
 
             // Get the author information
-            $authorId = Book::find($mostSoldBook->book_id)->author_id;
+            $authorId = $mostSoldBook->book->author_id;
             $author = Author::find($authorId);
 
             if ($author) {
                 $mostSoldAuthor = $author->first_name . ' ' . $author->last_name;
             }
+
+            // Get the cover image path
+            $mostSoldBookCover = $mostSoldBook->book->CoverImage;
         }
 
         // Prepare data for the revenue chart
@@ -102,6 +130,23 @@ class AdminController extends Controller
             }
         }
 
-        return view('admin.dashboard', compact('loginCountsByHour', 'labels', 'revenueValues', 'mostSoldBookTitle', 'mostSoldAuthor', 'mostSoldBooksLabels', 'mostSoldBooksDatasets'));
+        $genreData = Order::select('genres.genre_name', DB::raw('COUNT(orders.id) as book_count'))
+            ->join('books', 'orders.book_id', '=', 'books.id')
+            ->join('genres', 'books.genre_id', '=', 'genres.id')
+            ->groupBy('genres.genre_name')
+            ->get();
+
+// Initialize arrays for labels and data
+        $genreLabels = $genreData->pluck('genre_name')->toArray();
+        $genreCounts = $genreData->pluck('book_count')->toArray();
+
+        $totalUsersCount = $this->getUsersCount();
+
+        $userCountsByAgeGroup = $this->getUsersAgeGroupsCount();
+
+        return view('admin.dashboard', compact('loginCountsByHour', 'labels', 'revenueValues',
+            'mostSoldBookTitle', 'mostSoldAuthor', 'mostSoldBooksLabels',
+            'mostSoldBooksDatasets','genreLabels','genreCounts','totalUsersCount',
+            'userCountsByAgeGroup','mostSoldBookCover'));
     }
 }

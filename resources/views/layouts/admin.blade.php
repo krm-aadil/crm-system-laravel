@@ -14,7 +14,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
 " rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
     @include('sweetalert::alert')
 
     @vite('resources/css/app.css')

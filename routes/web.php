@@ -116,7 +116,7 @@ Route::put('/book_orders/{order}', [OrdersController::class, 'updateStatus']);
 
 //analytics
 Route::post('/track-login-button-click', [ClickController::class,'trackClick'])->name('track.login.button.click');
-
+Route::get('/maps', [AdminController::class,'maps'])->name('maps');
 //phonebook
 Route::get('/phonebook', [OrdersController::class, 'phonebook'])->name('phonebook');
 

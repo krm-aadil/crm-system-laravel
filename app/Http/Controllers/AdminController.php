@@ -149,4 +149,10 @@ class AdminController extends Controller
             'mostSoldBooksDatasets','genreLabels','genreCounts','totalUsersCount',
             'userCountsByAgeGroup','mostSoldBookCover'));
     }
+
+
+    public function maps()
+    {
+        return view('admin.maps');
+    }
 }

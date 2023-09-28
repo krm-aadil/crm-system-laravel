@@ -46,9 +46,20 @@ class HomePagesController extends Controller
         $cartItems = Cart::with('book')->where('user_id', $userId)->get();
 
         $ActionBooks = Book::where('genre_id', 1)->get();
+        $DramaBooks = Book::where('genre_id', 2)->get();
+        $ComedyBooks = Book::where('genre_id', 3)->get();
+        $RomanceBooks = Book::where('genre_id', 4)->get();
+        $HorrorBooks = Book::where('genre_id', 5)->get();
+        $MysteryBooks = Book::where('genre_id', 6)->get();
+        $ThrillerBooks = Book::where('genre_id', 7)->get();
+        $CrimeBooks = Book::where('genre_id', 8)->get();
+        $ScienceFictionBooks = Book::where('genre_id', 9)->get();
 
 
-        return view('categories', compact('ActionBooks','cartItems','books','searchTerm'));
+        return view('categories', compact('ActionBooks',
+            'cartItems','books','searchTerm','DramaBooks','ComedyBooks',
+            'RomanceBooks','HorrorBooks','MysteryBooks','ThrillerBooks','CrimeBooks',
+            'ScienceFictionBooks'));
     }
 
 }

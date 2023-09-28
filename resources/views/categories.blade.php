@@ -67,18 +67,18 @@
             </div>
         </div>
         <div class="mt-16">
-            <h3 class=" px-5 text-gray-600 text-2xl font-medium"> All Books</h3>
+            <h3 class=" px-5 text-gray-600 text-2xl font-medium"> Action Books</h3>
             <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
-                @foreach ($books as $book)
+                @foreach ($ActionBooks as $ActionBook)
                     <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
                         <div class="flex items-end justify-end h-56 w-full bg-cover"
-                             style="background-image: url('{{ asset('storage/' . $book->CoverImage) }}')">
+                             style="background-image: url('{{ asset('storage/' . $ActionBook->CoverImage) }}')">
 
-                            <form id="addToCartForm{{ $book->id }}" data-book-id="{{ $book->id }}" action="{{ route('cart.add', ['book' => $book->id]) }}" method="POST">
+                            <form id="addToCartForm{{ $ActionBook->id }}" data-book-id="{{ $ActionBook->id }}" action="{{ route('cart.add', ['book' => $ActionBook->id]) }}" method="POST">
                                 @csrf
                                 <button type="button"
                                         class="p-2 rounded-full bg-primary text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-                                        onclick="addToCart({{ $book->id }})">
+                                        onclick="addToCart({{ $ActionBook->id }})">
                                     <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                          viewBox="0 0 24 24" stroke="currentColor">
                                         <path
@@ -89,8 +89,140 @@
                             </form>
                         </div>
                         <div class="px-5 py-3">
-                            <a href="{{ route('books.show', ['book' => $book->id]) }}"> <h3 class="text-gray-700 uppercase">{{ $book->title }}</h3>View Details</a>
-                            <span class="text-gray-500 mt-2">${{ $book->price }}</span>
+                            <a href="{{ route('books.show', ['book' => $ActionBook->id]) }}"> <h3 class="text-gray-700 uppercase">{{ $ActionBook->title }}</h3>View Details</a>
+                            <span class="text-gray-500 mt-2">${{ $ActionBook->price }}</span>
+
+
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="mt-16">
+            <h3 class=" px-5 text-gray-600 text-2xl font-medium"> Drama Books</h3>
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+                @foreach ($DramaBooks as $DramaBook)
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover"
+                             style="background-image: url('{{ asset('storage/' . $DramaBook->CoverImage) }}')">
+
+                            <form id="addToCartForm{{ $DramaBook->id }}" data-book-id="{{ $DramaBook->id }}" action="{{ route('cart.add', ['book' => $DramaBook->id]) }}" method="POST">
+                                @csrf
+                                <button type="button"
+                                        class="p-2 rounded-full bg-primary text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+                                        onclick="addToCart({{ $DramaBook->id }})">
+                                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="px-5 py-3">
+                            <a href="{{ route('books.show', ['book' => $DramaBook->id]) }}"> <h3 class="text-gray-700 uppercase">{{ $DramaBook->title }}</h3>View Details</a>
+                            <span class="text-gray-500 mt-2">${{ $DramaBook->price }}</span>
+
+
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="mt-16">
+            <h3 class=" px-5 text-gray-600 text-2xl font-medium">Comedy Books</h3>
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+                @foreach ($ComedyBooks as $ComedyBook)
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover"
+                             style="background-image: url('{{ asset('storage/' . $ComedyBook->CoverImage) }}')">
+
+                            <form id="addToCartForm{{ $ComedyBook->id }}" data-book-id="{{ $ComedyBook->id }}" action="{{ route('cart.add', ['book' => $HorrorBook->id]) }}" method="POST">
+                                @csrf
+                                <button type="button"
+                                        class="p-2 rounded-full bg-primary text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+                                        onclick="addToCart({{ $ComedyBook->id }})">
+                                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="px-5 py-3">
+                            <a href="{{ route('books.show', ['book' => $ComedyBook->id]) }}"> <h3 class="text-gray-700 uppercase">{{ $DramaBook->title }}</h3>View Details</a>
+                            <span class="text-gray-500 mt-2">${{ $DramaBook->price }}</span>
+
+
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="mt-16">
+            <h3 class=" px-5 text-gray-600 text-2xl font-medium"> Horror Books</h3>
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+                @foreach ($HorrorBooks as $HorrorBook)
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover"
+                             style="background-image: url('{{ asset('storage/' . $HorrorBook->CoverImage) }}')">
+
+                            <form id="addToCartForm{{ $HorrorBook->id }}" data-book-id="{{ $HorrorBook->id }}" action="{{ route('cart.add', ['book' => $HorrorBook->id]) }}" method="POST">
+                                @csrf
+                                <button type="button"
+                                        class="p-2 rounded-full bg-primary text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+                                        onclick="addToCart({{$HorrorBook->id }})">
+                                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="px-5 py-3">
+                            <a href="{{ route('books.show', ['book' => $HorrorBook->id]) }}"> <h3 class="text-gray-700 uppercase">{{ $HorrorBook->title }}</h3>View Details</a>
+                            <span class="text-gray-500 mt-2">${{ $HorrorBook->price }}</span>
+
+
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="mt-16">
+            <h3 class=" px-5 text-gray-600 text-2xl font-medium"> Mystery Books</h3>
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+                @foreach ($MysteryBooks as $MysteryBook)
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover"
+                             style="background-image: url('{{ asset('storage/' . $MysteryBook->CoverImage) }}')">
+
+                            <form id="addToCartForm{{ $MysteryBook->id }}" data-book-id="{{$MysteryBook->id }}" action="{{ route('cart.add', ['book' => $MysteryBook->id]) }}" method="POST">
+                                @csrf
+                                <button type="button"
+                                        class="p-2 rounded-full bg-primary text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+                                        onclick="addToCart({{$MysteryBook->id }})">
+                                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="px-5 py-3">
+                            <a href="{{ route('books.show', ['book' => $MysteryBook->id]) }}"> <h3 class="text-gray-700 uppercase">{{ $MysteryBook->title }}</h3>View Details</a>
+                            <span class="text-gray-500 mt-2">${{ $MysteryBook->price }}</span>
 
 
                         </div>
@@ -101,6 +233,38 @@
 
 
 
+        <div class="mt-16">
+            <h3 class=" px-5 text-gray-600 text-2xl font-medium"> Thriller Books</h3>
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+                @foreach ($ThrillerBooks as $ThrillerBook)
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover"
+                             style="background-image: url('{{ asset('storage/' . $ThrillerBook->CoverImage) }}')">
+
+                            <form id="addToCartForm{{ $ThrillerBook->id }}" data-book-id="{{$ThrillerBook->id }}" action="{{ route('cart.add', ['book' => $ThrillerBook->id]) }}" method="POST">
+                                @csrf
+                                <button type="button"
+                                        class="p-2 rounded-full bg-primary text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+                                        onclick="addToCart({{$ThrillerBook->id }})">
+                                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="px-5 py-3">
+                            <a href="{{ route('books.show', ['book' => $ThrillerBook->id]) }}"> <h3 class="text-gray-700 uppercase">{{ $ThrillerBook->title }}</h3>View Details</a>
+                            <span class="text-gray-500 mt-2">${{ $ThrillerBook->price }}</span>
+
+
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
 
         <script>
             function updateCartCount() {

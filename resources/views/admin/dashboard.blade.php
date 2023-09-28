@@ -7,9 +7,9 @@
                 <div class="container mx-auto px-4 sm:px-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Total Users Card -->
-                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md flex items-center">
+                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md p-4 flex items-center">
                             <!-- Left side with the smaller image -->
-                            <img src="{{ asset('img/demure-girl-reading-a-book-sitting-in-an-armchair-next-to-a-floor-lamp-1.png') }}" alt="Math Image" class="w-20 h-auto mr-4">
+                            <img src="{{ asset('img/demure-girl-reading-a-book-sitting-in-an-armchair-next-to-a-floor-lamp-1.png') }}" alt="Math Image" class="w-16 h-auto mr-4">
 
                             <!-- Right side with the user count -->
                             <div>
@@ -18,14 +18,15 @@
                             </div>
                         </div>
 
+
                         <!-- Revenue Chart Card -->
-                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md">
+                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md p-4">
                             <h2 class="text-lg font-semibold text-blue-600 mb-4">Revenue Chart</h2>
                             <canvas id="revenue-chart"></canvas>
                         </div>
 
                         <!-- Login Counts Table Card -->
-                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md">
+                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md p-4">
                             <h2 class="text-lg font-semibold text-blue-600 mb-4">Login Counts by Hour</h2>
                             <table class="min-w-full rounded-md overflow-hidden bg-blue-100 divide-y divide-gray-200">
                                 <thead class="bg-blue-200">
@@ -47,7 +48,7 @@
 
 
                         <!-- Most Sold Book Card -->
-                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md">
+                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md p-4">
                             <h2 class="text-lg font-semibold text-blue-600 mb-4">Most Sold Book:</h2>
                             <p class="text-blue-900">Title: {{ $mostSoldBookTitle }}</p>
                             <p class="text-blue-900">Author: {{ $mostSoldAuthor }}</p>
@@ -57,20 +58,20 @@
                         </div>
 
                         <!-- Most Sold Books Chart Card -->
-                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md">
+                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md p-4">
                             <h2 class="text-lg font-semibold text-blue-600 mb-4">Most Sold Books by Title for Each Month</h2>
                             <canvas id="most-sold-books-chart"></canvas>
                         </div>
 
                         <!-- Books Sold by Genre Card -->
-                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md">
+                        <div class="col-span-1 bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md p-4">
                             <h2 class="text-lg font-semibold text-blue-600 mb-4">Books Sold by Genre</h2>
                             <canvas id="genre-chart"></canvas>
                         </div>
                     </div>
 
                     <!-- User Age Groups Chart Card -->
-                    <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md mt-8">
+                    <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg rounded-md p-4 mt-8">
                         <h2 class="text-lg font-semibold text-blue-600">User Age Groups</h2>
                         <canvas id="age-group-chart"></canvas>
                     </div>

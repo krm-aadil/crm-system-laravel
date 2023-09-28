@@ -8,9 +8,22 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="container mx-auto px-4 sm:px-8">
                     <div class="py-8">
-                        <div class="mb-4 text-2xl font-semibold text-violet-600">Order Details</div>
+                        <div class="mb-4 text-2xl font-semibold text-blue-600">Order Details</div>
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-
+                            <form action="{{ route('phonebook') }}" method="GET" class="mb-4">
+                                <div class="flex items-center">
+                                    <input
+                                        type="text"
+                                        name="search"
+                                        value="{{ $searchTerm ?? '' }}"
+                                        placeholder="Search by order id or name"
+                                        class="w-1/3 px-2 py-1 rounded focus:outline-none border border-gray-300"
+                                    />
+                                    <button type="submit" class=" px-2 py-1 bg-primary text-white rounded hover:bg-blue-600 focus:outline-none">
+                                        Search
+                                    </button>
+                                </div>
+                            </form>
                             <div class="mb-4">
                                 <label for="statusFilter" class="text-gray-600">Filter by Status:</label>
                                 <select id="statusFilter" class="px-2 py-1 border rounded-md">
@@ -22,7 +35,7 @@
 
 
                             <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-violet-100">
+                                <thead class="bg-blue-100">
                                 <tr>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                                         Order ID
@@ -77,7 +90,7 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @if ($order->status === 'pending')
-                                                <button data-order-id="{{ $order->id }}" class="bg-violet-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full deliver-button">
+                                                <button data-order-id="{{ $order->id }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full deliver-button">
                                                     Deliver
                                                 </button>
                                             @else
@@ -88,6 +101,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $orders->links() }}
                         </div>
                     </div>
                 </div>

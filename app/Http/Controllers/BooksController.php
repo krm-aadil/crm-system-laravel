@@ -20,13 +20,18 @@ class BooksController extends Controller
 
     public function index()
     {
+$searchTerm = request()->query('search');
 
         $genres = Genre::all();
         $languages = Language::all();
         $authors=Author::all();
 
-        $books = Book::all();
-        return view('books.index', compact('books','genres','languages','authors'));
+        $books = Book::where(function ($query) use ($searchTerm) {
+            $query->where('title', 'like', '%' . $searchTerm . '%')
+                ->orWhere('ISBN', 'like', '%' . $searchTerm . '%');
+        })->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('books.index', compact('books','genres','languages','authors','searchTerm'));
     }
 
     public function create()
@@ -119,21 +124,12 @@ class BooksController extends Controller
         $books = Book::all();
         $userId = Auth::id(); // Get the authenticated user's ID
         $cartItems = Cart::with('book')->where('user_id', $userId)->get();
+
+        $book->increment('views');
         return view('books.show', compact('book','books','cartItems'));
     }
 
 
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
 
-        // Perform a search query using the 'title' field
-        $results = Book::where('title', 'like', '%' . $query . '%')->get();
-
-        $userId = Auth::id(); // Get the authenticated user's ID
-        $cartItems = Cart::with('book')->where('user_id', $userId)->get();
-
-        return view('books.search', compact('results', 'cartItems'));
-    }
 
 }

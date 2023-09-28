@@ -9,7 +9,20 @@
                 <div class="ml-5 my-5">
                     <a href="{{ route('users.create') }}" class="bg-primary hover:bg-neutral text-white font-bold py-2 px-4 rounded">Create User</a>
                 </div>
-
+                <form action="{{ route('users.index') }}" method="GET" class="mb-4">
+                    <div class="flex items-center">
+                        <input
+                            type="text"
+                            name="search"
+                            value="{{ $searchTerm ?? '' }}"
+                            placeholder="Search by Customer Name"
+                            class="w-1/3 px-2 py-1 rounded focus:outline-none border border-gray-300"
+                        />
+                        <button type="submit" class=" px-2 py-1 bg-primary text-white rounded hover:bg-blue-600 focus:outline-none">
+                            Search
+                        </button>
+                    </div>
+                </form>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
@@ -38,6 +51,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                        {{ $users->links() }}
                         </tbody>
                     </table>
                 </div>

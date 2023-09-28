@@ -11,9 +11,14 @@ class OrdersController extends Controller
 
     public function index()
     {
-        $orders = Order::all();
+        $searchTerm = request()->query('search');
 
-        return view('book_orders.index', compact('orders'));
+        $orders = Order::where(function ($query) use ($searchTerm) {
+            $query->where('id', 'like', '%' . $searchTerm . '%')
+                ->orWhere('customer_name', 'like', '%' . $searchTerm . '%');
+        })->orderBy('created_at', 'desc')->paginate(25);
+
+        return view('book_orders.index', compact('orders', 'searchTerm'));
     }
 
     public function updateStatus(Request $request, Order $order)
@@ -29,5 +34,21 @@ class OrdersController extends Controller
         return response()->json(['message' => 'Status updated successfully']);
     }
 
+    public function destroy(Order $order)
+    {
+        $order->delete();
+
+        return redirect()->route('orders.index')->with('success', 'Order deleted successfully');
+    }
+
+    public function phonebook(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        // Perform the search query
+        $orders = Order::where('customer_name', 'like', '%' . $searchTerm . '%')->paginate(10);
+
+        return view('book_orders.PhoneBook', compact('orders','searchTerm'));
+    }
 
 }

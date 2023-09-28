@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index()
     {
+        $searchTerm = request()->query('search');
         // Retrieve all users from the database and pass them to the view
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
+        $users = User::where(function (Builder $query) {
+            $query->where('name', 'like', '%' . request()->query('search') . '%')
+                ->orWhere('email', 'like', '%' . request()->query('search') . '%');
+        })->orderBy('created_at', 'desc')->paginate(10);
+
+
+        return view('admin.users.index', compact('users','searchTerm'));
     }
 
     public function create()

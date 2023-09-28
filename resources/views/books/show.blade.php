@@ -59,7 +59,7 @@
                     <p class="text-lg text-gray-800 font-medium">Total: ${{ $totalAmount }}</p>
                 </div>
                 <form class="flex items-center justify-center">
-                    <a href="{{route('user.dashboard')}}" class="flex items-center justify-center mt-4 px-3 py-2 bg-violet-600 text-white text-sm uppercase font-medium rounded hover:bg-violet-500 focus:outline-none focus:bg-violet-500">
+                    <a href="{{route('user.dashboard')}}" class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                         <span>Go to Cart <i class="fa fa-cart-arrow-down" aria-hidden="true"></i></span>
                         <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </a>
@@ -90,7 +90,7 @@
                     <!-- Add to Cart Form -->
                     <form id="addToCartForm{{ $book->id }}" data-book-id="{{ $book->id }}" action="{{ route('cart.add', ['book' => $book->id]) }}" method="POST">
                         @csrf
-                        <button type="button" class="mt-6 px-6 py-3 bg-violet-600 text-white text-lg uppercase font-medium rounded-lg hover:bg-violet-500 focus:outline-none focus:bg-violet-500" onclick="addToCart({{ $book->id }})">
+                        <button type="button" class="mt-6 px-6 py-3 bg-blue-600 text-white text-lg uppercase font-medium rounded-lg hover:bg-blue-500 focus:outline-none focus:bg-blue-500" onclick="addToCart({{ $book->id }})">
                             Add to Cart
                         </button>
                     </form>

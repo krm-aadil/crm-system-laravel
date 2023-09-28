@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomePagesController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
@@ -90,7 +91,7 @@ Route::delete('/books/{book}', [BooksController::class, 'destroy'])->name('books
 Route::get('/books/{book}', [BooksController::class, 'show'])->name('books.show');
 
 //Route to search all books
-Route::get('/search', [BooksController::class, 'search'])->name('books.search');
+Route::get('/search', [HomePagesController::class, 'search'])->name('books.search');
 
 //checkout routes
 Route::middleware([
@@ -115,3 +116,11 @@ Route::put('/book_orders/{order}', [OrdersController::class, 'updateStatus']);
 
 //analytics
 Route::post('/track-login-button-click', [ClickController::class,'trackClick'])->name('track.login.button.click');
+
+//phonebook
+Route::get('/phonebook', [OrdersController::class, 'phonebook'])->name('phonebook');
+
+
+//ecommerce page
+Route::get('livre/about', [HomePagesController::class, 'about'])->name('about-us');
+Route::get('livre/categories', [HomePagesController::class, 'categories'])->name('book-categories');

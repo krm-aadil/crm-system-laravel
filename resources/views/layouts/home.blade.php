@@ -44,7 +44,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
             </div>
 
             <a href="{{route('welcome')}}">
-                <div class="w-full text-violet-700 md:text-center text-2xl font-semibold">
+                <div class="w-full text-blue-700 md:text-center text-2xl font-semibold">
                     LIVRE.
                 </div>
             </a>
@@ -59,30 +59,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
 
                 </div>
             </div >
-{{--            <div class="navbar-end  ">--}}
 
-{{--                @if (Route::has('login'))--}}
-{{--                    <div class>--}}
-{{--                        @auth--}}
-{{--                            <a href="{{ route('user.dashboard') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Dashboard</a>--}}
-{{--                        @else--}}
-{{--                            <a href="{{ route('login') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary ">Log in</a>--}}
-
-{{--                            @if (Route::has('register'))--}}
-{{--                                <a href="{{ route('register') }}" class="ml-4 font-semibold text-primary hover:text-secondary focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Register</a>--}}
-{{--                            @endif--}}
-{{--                        @endauth--}}
-{{--                    </div>--}}
-{{--                @endif--}}
-{{--            </div>--}}
         </div>
         <nav :class="isOpen ? '' : 'hidden'" class="sm:flex sm:justify-center sm:items-center mt-4">
             <div class="flex flex-col sm:flex-row">
-                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Home</a>
-                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Shop</a>
-                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Categories</a>
-                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Contact</a>
-                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">About</a>
+                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{route('welcome')}}">Home</a>
+                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{route('books.search')}}">Shop</a>
+                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{route('book-categories')}}">Categories</a>
+                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{route('about-us')}}">About</a>
             </div>
         </nav>
         <div class="relative mt-6 max-w-lg mx-auto">
@@ -99,13 +83,10 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
                 </form>
             @else
                 <form action="{{route('books.search')}}" method="GET">
-                    <input type="text" name="search" id="search" placeholder="Search" class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-violet-500 focus:outline-none focus:shadow-outline" autocomplete="off">
+                    <input type="text" name="search" id="search" value="{{ $searchTerm ?? '' }}" placeholder="Search" class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline" autocomplete="off">
+
                 </form>
-
             @endif
-
-
-
         </div>
     </div>
 </header>

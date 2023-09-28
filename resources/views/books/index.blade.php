@@ -4,7 +4,22 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <form action="{{ route('books.index') }}" method="GET" class="mb-4">
+                    <div class="flex items-center">
+                        <input
+                            type="text"
+                            name="search"
+                            value="{{ $searchTerm ?? '' }}"
+                            placeholder="Search by order id or name"
+                            class="w-1/3 px-2 py-1 rounded focus:outline-none border border-gray-300"
+                        />
+                        <button type="submit" class=" px-2 py-1 bg-primary text-white rounded hover:bg-blue-600 focus:outline-none">
+                            Search
+                        </button>
+                    </div>
+                </form>
                 <div class="container">
+
                     <div class="mb-4">
                         <a href="{{ route('books.create') }}" class="btn btn-primary">Create Book</a>
                     </div>
@@ -59,6 +74,7 @@
 
                             </tr>
                         @endforeach
+                        {{ $books->links() }}
                         </tbody>
                     </table>
                 </div>

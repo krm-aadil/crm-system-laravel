@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -38,9 +39,9 @@ Route::get('redirects', [HomeController::class, 'index'])->name('redirects');
 
 
 //ADMIN ROUTES
-Route::get('admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+Route::get('dashboard/analytics', [AdminController::class, 'analytics'])->name('analytics');
+
+
 Route::get('admin/users', [UserController::class,'index'])->name('users.index');
 Route::get('admin/users/create', [UserController::class,'create'])->name('users.create');
 Route::post('admin/users', [UserController::class,'store'])->name('users.store');

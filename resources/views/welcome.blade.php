@@ -17,7 +17,7 @@
                     <div class="flex">
                         @auth
                             @if(auth()->user()->role == 'admin')
-                                <a href="{{ route('admin.dashboard') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Dashboard</a>
+                                <a href="{{ route('analytics') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Dashboard</a>
                             @else
                                 <a href="{{ route('user.dashboard') }}" class="font-semibold text-primary hover:text-neutral focus:outline focus:outline-2 focus:rounded-sm focus:outline-secondary">Dashboard</a>
                             @endif

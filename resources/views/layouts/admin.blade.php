@@ -6,13 +6,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <!-- Include SweetAlert CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
 
     <!-- Include SweetAlert JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.js"></script>
 
     @include('sweetalert::alert')
 
@@ -46,7 +47,7 @@
 
             <ul class="space-y-2 tracking-wide mt-8">
                 <li>
-                    <a href="{{ route('admin.dashboard') }}" aria-label="dashboard" class="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600 {{ request()->routeIs('admin.dashboard') ? 'bg-gradient-to-r from-sky-600 to-cyan-400 active:bg-gradient-to-r active:from-sky-600 active:to-cyan-400' : '' }}">
+                    <a href="{{ route('analytics') }}" aria-label="dashboard" class="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600 {{ request()->routeIs('analytics') ? 'bg-gradient-to-r from-sky-600 to-cyan-400 active:bg-gradient-to-r active:from-sky-600 active:to-cyan-400' : '' }}">
 
                     <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
                             <path d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z" class="fill-current text-cyan-400 dark:fill-slate-600"></path>

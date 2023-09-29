@@ -1,9 +1,10 @@
-<div >
+<a href="{{route("welcome")}}">
 
-    <a  href="{{route('welcome')}} ">
-        <div class="text-gray-700  text-left text-2xl font-semibold">
-        LIVRE .
-</div>
+    <button class="btn ">
+        <div class="text-primary text-4xl font-bold ">
+            LIVRE .
+        </div>
 
-    </a>
-</div>
+    </button>
+
+</a>

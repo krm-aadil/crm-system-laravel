@@ -41,7 +41,7 @@ Route::get('redirects', [HomeController::class, 'index'])->name('redirects');
 
 //ADMIN ROUTES
 Route::get('dashboard/analytics', [AdminController::class, 'analytics'])->name('analytics');
-
+Route::get('/maps', [AdminController::class,'maps'])->name('maps');
 
 Route::get('admin/users', [UserController::class,'index'])->name('users.index');
 Route::get('admin/users/create', [UserController::class,'create'])->name('users.create');
@@ -116,7 +116,8 @@ Route::put('/book_orders/{order}', [OrdersController::class, 'updateStatus']);
 
 //analytics
 Route::post('/track-login-button-click', [ClickController::class,'trackClick'])->name('track.login.button.click');
-Route::get('/maps', [AdminController::class,'maps'])->name('maps');
+
+
 //phonebook
 Route::get('/phonebook', [OrdersController::class, 'phonebook'])->name('phonebook');
 

@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Click;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -153,6 +154,12 @@ class AdminController extends Controller
 
     public function maps()
     {
-        return view('admin.maps');
+        $users = User::join('cities', 'users.city_id', '=', 'cities.id')
+            ->select('users.*', 'cities.latitude', 'cities.longitude')
+            ->get();
+
+        return view('admin.maps', ['users' => $users]);
     }
+
+
 }

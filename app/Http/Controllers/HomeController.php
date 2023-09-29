@@ -52,7 +52,8 @@ class HomeController extends Controller
         $user = Auth::user();
 
         // Fetch the user's purchase history from the Order model
-        $purchaseHistory = Order::where('user_id', $user->id)->get();
+        $purchaseHistory = Order::where('user_id', $user->id)->get()
+            ->sortByDesc('created_at')->take(15);
 
         // Fetch the cart items (if needed)
         $cartItems = Cart::where('user_id', $user->id)->get();

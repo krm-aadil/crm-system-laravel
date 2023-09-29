@@ -15,6 +15,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+
+    <!-- Add this to the <head> section of your HTML -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Add this before the closing </body> tag of your HTML -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
     @include('sweetalert::alert')
 
     @vite('resources/css/app.css')
@@ -107,6 +114,17 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
                             <path class="fill-current text-gray-300 group-hover:text-cyan-300" d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
                         </svg>
                         <span class="group-hover:text-gray-700">Customer Phonebook</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('maps') }}" aria-label="dashboard" class="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600
+                    {{ request()->routeIs('maps') ? 'bg-gradient-to-r from-sky-600 to-cyan-400 active:bg-gradient-to-r active:from-sky-600 active:to-cyan-400' : '' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path class="fill-current text-gray-600 group-hover:text-cyan-600" d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+                            <path class="fill-current text-gray-300 group-hover:text-cyan-300" d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+                        </svg>
+                        <span class="group-hover:text-gray-700">User locations</span>
                     </a>
                 </li>
             </ul>

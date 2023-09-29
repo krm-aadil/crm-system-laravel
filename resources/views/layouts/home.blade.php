@@ -44,7 +44,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
             </div>
 
             <a href="{{route('welcome')}}">
-                <div class="w-full text-blue-700 md:text-center text-2xl font-semibold">
+                <div class="w-full text-primary  outline-black md:text-center text-4xl font-bold">
                     LIVRE.
                 </div>
             </a>
@@ -63,10 +63,10 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
         </div>
         <nav :class="isOpen ? '' : 'hidden'" class="sm:flex sm:justify-center sm:items-center mt-4">
             <div class="flex flex-col sm:flex-row">
-                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{route('welcome')}}">Home</a>
-                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{route('books.search')}}">Shop</a>
-                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{route('book-categories')}}">Categories</a>
-                <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{route('about-us')}}">About</a>
+                <a class=" text-xl mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0 font-bold" href="{{route('welcome')}}">Home</a>
+                <a class="mt-3 text-xl text-gray-600 hover:underline sm:mx-3 sm:mt-0 font-bold" href="{{route('books.search')}}">Shop</a>
+                <a class="mt-3 text-xl text-gray-600 hover:underline sm:mx-3 sm:mt-0 font-bold" href="{{route('book-categories')}}">Categories</a>
+                <a class="mt-3 text-xl text-gray-600 hover:underline sm:mx-3 sm:mt-0 font-bold" href="{{route('about-us')}}">About</a>
             </div>
         </nav>
         <div class="relative mt-6 max-w-lg mx-auto">
@@ -112,9 +112,10 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
     <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
-                <img src="#" class="mr-5 h-6 sm:h-9" alt="logo" />
+{{--                <img src="" class="mr-5 h-6 sm:h-9" alt="logo" />--}}
+                <h3 class="text-primary font-bold">LIVRE .</h3>
                 <p class="max-w-xs mt-4 text-sm text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, accusantium.
+                    Books are windows to countless worlds. Crime thrillers offer suspense, fantasy whisks you away, and dramas delve into human hearts. Reading is an adventure for the soul.
                 </p>
                 <div class="flex mt-8 space-x-6 text-gray-600">
                     <a class="hover:opacity-75" href target="_blank" rel="noreferrer">
@@ -197,7 +198,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
             </div>
         </div>
         <p class="mt-8 text-xs text-gray-800">
-            © 2022 Comany Name
+            ©aadil-2023
         </p>
     </div>
 </footer>

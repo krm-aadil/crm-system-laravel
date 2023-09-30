@@ -145,10 +145,12 @@ class AdminController extends Controller
 
         $userCountsByAgeGroup = $this->getUsersAgeGroupsCount();
 
+        $userProfilePic= User::select('profile_photo_path')->where('id', auth()->user()->id)->first();
+
         return view('admin.dashboard', compact('loginCountsByHour', 'labels', 'revenueValues',
             'mostSoldBookTitle', 'mostSoldAuthor', 'mostSoldBooksLabels',
             'mostSoldBooksDatasets','genreLabels','genreCounts','totalUsersCount',
-            'userCountsByAgeGroup','mostSoldBookCover'));
+            'userCountsByAgeGroup','mostSoldBookCover','userProfilePic'));
     }
 
 

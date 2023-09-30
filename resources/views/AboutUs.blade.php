@@ -3,7 +3,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-blue-200 overflow-hidden shadow-xl sm:rounded-lg">
 
             <div class="flex md:flex-row flex-col-reverse md:items-stretch items-center justify-center">
         <div class="md:py-20 xl:w-1/2 sm:w-1/2 lg:mr-20 md:mr-6 flex flex-col md:items-end items-center justify-center xl:mr-28">
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="py-12 xl:w-1/2 lg:w-1/3 sm:w-1/2 ">
-            <img  src="{{asset('img/man-and-woman-using-laptop-and-looking-for-job-vacancies-on-internet-3d-character-illustration-png.png')}}" alt="image of a woman studying" class="h-full rounded-md object-cover object-center md:block hidden" />
+            <img  src="{{asset('img/young-modern-girl-holding-pile-books-smiling-laughing-hard-out-loud-because-funny-crazy-joke.jpg')}}" alt="image of a woman studying" class="h-full rounded-md object-cover object-center md:block hidden" />
             <img src="https://i.ibb.co/NT0VJcd/pexels-la-miko-3681591-1.png" alt="image of a woman studying" class="h-auto w-auto md:hidden block" />
         </div>
     </div>

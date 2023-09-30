@@ -126,8 +126,8 @@
     </div>
 
 </div>
-<div class="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
-    <img src="{{asset("img/young-modern-girl-holding-pile-books-smiling-laughing-hard-out-loud-because-funny-crazy-joke.jpg")}}" alt="" class="w-full h-full object-cover">
+<div class="bg-blue-400 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
+    <img src="{{asset("img/register.png")}}" alt="" class="w-full h-full object-cover">
 </div>
 </body>
 </html>

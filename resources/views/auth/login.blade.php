@@ -11,7 +11,7 @@
     <section class="flex flex-col md:flex-row h-screen items-center">
 
         <div class="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
-            <img src="{{asset('img/young-modern-girl-holding-pile-books-smiling-laughing-hard-out-loud-because-funny-crazy-joke.jpg')}}" alt="" class="w-full h-full object-cover">
+            <img src="{{asset('img/casual-life-3d-tall-stack-of-books.png')}}" alt="" class="w-full h-full object-cover">
         </div>
 
 

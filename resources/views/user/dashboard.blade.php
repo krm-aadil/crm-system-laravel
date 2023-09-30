@@ -4,7 +4,7 @@
     <div class="container mx-auto mt-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Checkout Form -->
-            <div class="bg-white shadow-md rounded-lg p-6">
+            <div class="bg-blue-100 shadow-md rounded-lg p-6">
                 <h2 class="text-2xl font-semibold mb-4">Checkout</h2>
                 <form action="{{ route('checkout.process') }}" method="POST">
                     @csrf
@@ -34,30 +34,24 @@
                     </div>
 
                     <!-- Cart Information -->
-                    <!-- Cart Information -->
                     <h3 class="text-lg font-semibold mb-4">Cart Items:</h3>
                     @php
                         $totalAmount = 0; // Initialize the total amount
                     @endphp
                     @foreach ($cartItems as $cartItem)
-                        <div class="mb-4 flex items-center justify-between" id="cartItem{{ $cartItem->id }}">
-                            <div class="flex items-center">
-{{--                                <img src="src="{{ asset('storage/' . $cartItem->book->CoverImage) }}" alt="Book Cover" class="w-16 h-16 mr-4">--}}
-                                <p class="text-gray-700">{{ $cartItem->book->title }} - Price: ${{ $cartItem->book->price }}</p>
-                            </div>
-                            <div class="flex items-center">
-                                <!-- Add buttons to increase, decrease, or remove the item -->
-                                <button type="button" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onclick="decreaseQuantity({{ $cartItem->id }})">-</button>
-                                <span class="text-gray-700 mx-2">Qty: <span id="quantity{{ $cartItem->id }}">{{ $cartItem->quantity }}</span></span>
-                                <button type="button" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onclick="increaseQuantity({{ $cartItem->id }})">+</button>
-                                <button type="button" class=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onclick="removeItem({{ $cartItem->id }})">Remove</button>
-                            </div>
+                        <div class="mb-4" id="cartItem{{ $cartItem->id }}">
+                            <p class="text-gray-700">{{ $cartItem->book->title }} (Qty: <span id="quantity{{ $cartItem->id }}">{{ $cartItem->quantity }}</span>)</p>
+                            <!-- Calculate and display the subtotal for each item -->
+                            <p class="text-gray-700">Subtotal: $<span id="subtotal{{ $cartItem->id }}">{{ $cartItem->book->price * $cartItem->quantity }}</span></p>
+                            <!-- Add buttons to increase, decrease, or remove the item -->
+                            <button type="button" class="btn btn-primary" onclick="decreaseQuantity({{ $cartItem->id }})">-</button>
+                            <button type="button" class="btn btn-primary" onclick="increaseQuantity({{ $cartItem->id }})">+</button>
+                            <button type="button" class="btn btn-primary" onclick="removeItem({{ $cartItem->id }})">Remove</button>
                         </div>
                         @php
                             $totalAmount += $cartItem->book->price * $cartItem->quantity; // Update the total amount
                         @endphp
                     @endforeach
-
                     <!-- Display the total amount -->
                     <h3 class="text-lg font-semibold mb-4">Total Amount:</h3>
                     <p class="text-gray-700 font-semibold text-xl" id="totalAmount">${{ $totalAmount }}</p>
@@ -67,52 +61,58 @@
                         <label class="block text-gray-700 font-bold mb-2">Payment Method:</label>
                         <label class="inline-flex items-center">
                             <input type="radio" name="payment_method" value="cash_on_delivery" checked
-                                   class="form-radio text-blue-600">
+                                   class="form-radio text-primary">
                             <span class="ml-2">Cash on Delivery</span>
                         </label>
                     </div>
 
                     <div class="mt-6">
                         <button type="submit"
-                                class="bg-blue-500 hover:bg-primary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                class="bg-primary hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Place Order
                         </button>
                     </div>
                 </form>
             </div>
-            <div class="bg-white shadow-md rounded-lg p-6">
+            <div class="bg-blue-400 shadow-md rounded-lg p-6">
                 <img src="{{asset('img/young-girl-reading-a-book-while-sitting-on-chair-3d-character-illustration-png.png')}}" alt="Image" class="w-full h-auto">
             </div>
-            <div class="bg-white shadow-md rounded-lg p-6">
+            <div class="bg-blue-400 shadow-md rounded-lg p-6">
                 <img src="{{asset('img/man-and-woman-sitting-on-big-pile-of-books-using-tablet-laptop-and-book-3d-character-illustration-png.png')}}" alt="Image" class="w-full h-auto">
             </div>
             <!-- Purchase History -->
-            <div class="bg-white shadow-md rounded-lg p-6">
+            <div class="bg-blue-200 shadow-md rounded-lg p-6 ">
                 <h2 class="text-2xl font-semibold mb-4">Purchase History</h2>
-                <table class="min-w-full">
-                    <thead>
-                    <tr>
-                        <th class="px-4 py-2">Date</th>
-                        <th class="px-4 py-2">Total Amount</th>
-                        <th class="px-4 py-2">Book Title</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($purchaseHistory as $order)
+                <div class="overflow-x-auto rounded-2xl">
+                    <table class="min-w-full rounded-lg">
+                        <thead >
                         <tr>
-                            <td class="px-4 py-2">{{ $order->created_at->format('Y-m-d') }}</td>
-                            <td class="px-4 py-2">${{ $order->total_amount }}</td>
-                            <td class="px-4 py-2">{{ $order->book->title }}</td>
+                            <th class="px-6 py-3 bg-blue-300 text-left text-xs leading-4 font-medium text-black uppercase tracking-wider">
+                                Date
+                            </th>
+                            <th class="px-6 py-3 bg-blue-300 text-left text-xs leading-4 font-medium text-black uppercase tracking-wider">
+                                Total Amount
+                            </th>
+                            <th class="px-6 py-3 bg-blue-300 text-left text-xs leading-4 font-medium text-black uppercase tracking-wider">
+                                Book Title
+                            </th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach ($purchaseHistory as $order)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-no-wrap">{{ $order->created_at->format('Y-m-d') }}</td>
+                                <td class="px-6 py-4 whitespace-no-wrap">${{ $order->total_amount }}</td>
+                                <td class="px-6 py-4 whitespace-no-wrap">{{ $order->book->title }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-        </div>
-    </div>
 
-    <script>
+            <script>
         // Function to decrease the quantity of a cart item
         function decreaseQuantity(cartItemId) {
             const quantityElement = document.getElementById(`quantity${cartItemId}`);

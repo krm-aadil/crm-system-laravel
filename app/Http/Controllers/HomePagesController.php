@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,6 +61,13 @@ class HomePagesController extends Controller
             'cartItems','books','searchTerm','DramaBooks','ComedyBooks',
             'RomanceBooks','HorrorBooks','MysteryBooks','ThrillerBooks','CrimeBooks',
             'ScienceFictionBooks'));
+    }
+
+    public function layout()
+    {
+        $userProfilePic= User::select('profile_photo_path')->where('id', auth()->user()->id)->first();
+
+        return view('layouts.admin',compact('userProfilePic'));
     }
 
 }

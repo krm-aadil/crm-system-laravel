@@ -125,3 +125,6 @@ Route::get('/phonebook', [OrdersController::class, 'phonebook'])->name('phoneboo
 //ecommerce page
 Route::get('livre/about', [HomePagesController::class, 'about'])->name('about-us');
 Route::get('livre/categories', [HomePagesController::class, 'categories'])->name('book-categories');
+
+//layout render
+Route::get('livre/layout', [HomePagesController::class, 'layout'])->name('layout');

@@ -43,11 +43,16 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
                 <span class="mx-1 text-sm">SRILANKA</span>
             </div>
 
-            <a href="{{route('welcome')}}">
-                <div class="w-full text-primary  outline-black md:text-center text-4xl font-bold">
-                    LIVRE.
-                </div>
+            <a href="{{route("welcome")}}">
+                <button class="btn ">
+                    <div class="text-primary text-4xl font-bold ">
+                        LIVRE.
+                    </div>
+
+                </button>
+
             </a>
+
 
             <div class="flex items-center justify-end w-full">
                 <div class="flex sm:hidden">

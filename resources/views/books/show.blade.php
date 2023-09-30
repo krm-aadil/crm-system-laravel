@@ -12,7 +12,7 @@
 
 
 
-        <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">
+        <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 shadow-2xl transform overflow-y-auto bg-white border-l-2 border-blue-400 rounded-2xl">
             <div class="flex items-center justify-between">
                 <h3 class="text-2xl font-medium text-gray-700">Your cart</h3>
                 <button @click="cartOpen = !cartOpen" class="text-gray-600 focus:outline-none">
@@ -69,28 +69,30 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="bg-blue-100 overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="container">
         <div class="container mx-auto px-6 mt-8">
             <div class="flex">
                 <div class="w-1/2">
                     <img src="{{ asset('storage/' . $book->CoverImage) }}" alt="{{ $book->title }}" class="w-full h-auto rounded-lg shadow-lg">
+                    <br>
                 </div>
                 <div class="w-1/2 ml-6">
                     <h2 class="text-3xl font-semibold mb-2">{{ $book->title }}</h2>
-                    <p class="text-gray-600">Author: {{ $book->author->first_name }} {{ $book->author->last_name }}</p>
-                    <p class="text-gray-600">Genre: {{ $book->genre->genre_name }}</p>
-                    <p class="text-gray-600">Language: {{ $book->language->language_name }}</p>
-                    <p class="text-gray-600">Price: ${{ $book->price }}</p>
-                    <p class="text-gray-600">Quantity in Stock: {{ $book->quantity }}</p>
-                    <p class="text-gray-600">ISBN: {{ $book->ISBN }}</p>
-                    <p class="text-gray-600 mt-4">Summary:</p>
+                    <p class="text-black font-semibold">Author: {{ $book->author->first_name }} {{ $book->author->last_name }}</p>
+                    <p class="text-black font-semibold">Genre: {{ $book->genre->genre_name }}</p>
+                    <p class="text-black font-semibold">Language: {{ $book->language->language_name }}</p>
+                    <p class="text-black font-semibold">Price: ${{ $book->price }}</p>
+                    <p class="text-black font-semibold">Quantity in Stock: {{ $book->quantity }}</p>
+                    <p class="text-black font-semibold">ISBN: {{ $book->ISBN }}</p>
+                    <p class="text-black font-semibold mt-4">Summary:</p>
                     <p class="text-gray-800">{{ $book->summary }}</p>
 
                     <!-- Add to Cart Form -->
                     <form id="addToCartForm{{ $book->id }}" data-book-id="{{ $book->id }}" action="{{ route('cart.add', ['book' => $book->id]) }}" method="POST">
+                        <br>
                         @csrf
-                        <button type="button" class="mt-6 px-6 py-3 bg-blue-600 text-white text-lg uppercase font-medium rounded-lg hover:bg-blue-500 focus:outline-none focus:bg-blue-500" onclick="addToCart({{ $book->id }})">
+                        <button type="button" class="btn btn-primary px-5" onclick="addToCart({{ $book->id }})">
                             Add to Cart
                         </button>
                     </form>
@@ -99,6 +101,7 @@
         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <script>

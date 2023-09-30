@@ -140,7 +140,7 @@
                         <div class="flex items-end justify-end h-56 w-full bg-cover"
                              style="background-image: url('{{ asset('storage/' . $ComedyBook->CoverImage) }}')">
 
-                            <form id="addToCartForm{{ $ComedyBook->id }}" data-book-id="{{ $ComedyBook->id }}" action="{{ route('cart.add', ['book' => $HorrorBook->id]) }}" method="POST">
+                            <form id="addToCartForm{{ $ComedyBook->id }}" data-book-id="{{ $ComedyBook->id }}" action="{{ route('cart.add', ['book' => $ComedyBook->id]) }}" method="POST">
                                 @csrf
                                 <button type="button"
                                         class="p-2 rounded-full bg-primary text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
@@ -155,8 +155,8 @@
                             </form>
                         </div>
                         <div class="px-5 py-3">
-                            <a href="{{ route('books.show', ['book' => $ComedyBook->id]) }}"> <h3 class="text-gray-700 uppercase">{{ $DramaBook->title }}</h3>View Details</a>
-                            <span class="text-gray-500 mt-2">${{ $DramaBook->price }}</span>
+                            <a href="{{ route('books.show', ['book' => $ComedyBook->id]) }}"> <h3 class="text-gray-700 uppercase">{{ $ComedyBook->title }}</h3>View Details</a>
+                            <span class="text-gray-500 mt-2">${{ $ComedyBook->price }}</span>
 
 
                         </div>

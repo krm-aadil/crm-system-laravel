@@ -74,7 +74,7 @@
         <div class="container mx-auto px-6 mt-8">
             <div class="flex">
                 <div class="w-1/2">
-                    <img src="{{ asset('storage/' . $book->CoverImage) }}" alt="{{ $book->title }}" class="w-full h-auto rounded-lg shadow-lg">
+                    <img src="{{ asset('storage/' . $book->CoverImage) }}" alt="{{ $book->title }}" class="w-full h-60 rounded-lg shadow-lg object-cover">
                     <br>
                 </div>
                 <div class="w-1/2 ml-6">

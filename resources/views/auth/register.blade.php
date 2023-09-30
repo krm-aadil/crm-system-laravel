@@ -51,15 +51,6 @@
                 <x-input id="address" class="block mt-1 w-full bg-blue-200" type="text" name="address" :value="old('address')" required autocomplete="address" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="city" value="{{ __('City') }}" />
-                <x-input id="city_id" class="block mt-1 w-full bg-blue-200" type="text" name="city_id" :value="old('city')" required autocomplete="city" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="country" value="{{ __('Province') }}" />
-                <x-input id="country_id" class="block mt-1 w-full bg-blue-200" type="text" name="province_id" :value="old('country')" required autocomplete="country" />
-            </div>
 
 
             <div class="mt-4">
@@ -126,8 +117,10 @@
     </div>
 
 </div>
-<div class="bg-blue-400 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
+<div class="bg-gradient-to-b from-blue-500 to-white h-24 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
     <img src="{{asset("img/register.png")}}" alt="" class="w-full h-full object-cover">
+
+
 </div>
 </body>
 </html>

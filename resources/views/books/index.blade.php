@@ -4,6 +4,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="container mx-auto px-4 sm:px-8">
                 <form action="{{ route('books.index') }}" method="GET" class="mb-4">
                     <div class="flex items-center">
                         <input
@@ -40,10 +41,10 @@
                             <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                         @foreach ($books as $book)
                             <tr>
-                                <td>{{ $book->title }}</td>
+                                <td >{{ $book->title }}</td>
                                 <td>{{ $book->ISBN }}</td>
                                 <td>{{ $book->price }}</td>
                                 <td>{{ $book->summary ?? 'N/A' }}</td>
@@ -80,5 +81,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

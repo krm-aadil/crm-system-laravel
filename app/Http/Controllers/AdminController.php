@@ -41,6 +41,7 @@ class AdminController extends Controller
         // Initialize an array to store login counts by hour
         $loginCountsByHour = [];
 
+
         // Loop through login activities and group them by hour
         foreach ($loginActivities as $activity) {
             $timestamp = Carbon::parse($activity->created_at);
@@ -55,7 +56,7 @@ class AdminController extends Controller
 
         // Sort the login counts by hour in descending order
         arsort($loginCountsByHour);
-
+        $loginCountsByHour = array_slice($loginCountsByHour, 0, 5);
         // Fetch real revenue data from the database
         $revenueData = Order::selectRaw('DATE(created_at) as order_date, SUM(total_amount) as revenue')
             ->groupBy('order_date')
@@ -147,10 +148,45 @@ class AdminController extends Controller
 
         $userProfilePic= User::select('profile_photo_path')->where('id', auth()->user()->id)->first();
 
+
+        $mostViewedBooksData = Book::orderBy('views', 'desc')
+            ->limit(5) // Limit to the top 5 most viewed books
+            ->get();
+        $mostViewedBooksLabels = $mostViewedBooksData->pluck('title')->toArray();
+        $mostViewedBooksViewCounts = $mostViewedBooksData->pluck('views')->toArray();
+
+        $userCountsByMonth = $this->getUsersCountByMonth();
+
+// Prepare data for the user count by month line chart
+        $userCountLabels = $userCountsByMonth->map(function ($item) {
+            return Carbon::create($item->year, $item->month)->format('M Y');
+        })->toArray();
+
+        $userCountValues = $userCountsByMonth->pluck('user_count')->toArray();
+
+        $provinceData = $this->getUsersCountByProvince();
+        $provinceLabels = $provinceData->pluck('province_name')->toArray();
+        $provinceCounts = $provinceData->pluck('user_count')->toArray();
+
+        $provinceData = $this->getUsersCountByProvince();
+
+
         return view('admin.dashboard', compact('loginCountsByHour', 'labels', 'revenueValues',
             'mostSoldBookTitle', 'mostSoldAuthor', 'mostSoldBooksLabels',
             'mostSoldBooksDatasets','genreLabels','genreCounts','totalUsersCount',
-            'userCountsByAgeGroup','mostSoldBookCover','userProfilePic'));
+            'userCountsByAgeGroup','mostSoldBookCover','userProfilePic','mostViewedBooksLabels',
+            'mostViewedBooksViewCounts','userCountLabels','userCountValues','provinceLabels','provinceCounts','provinceData'));
+    }
+
+    public function getUsersCountByMonth()
+    {
+        $userCountsByMonth = User::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as user_count')
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'asc')
+            ->orderBy('month', 'asc')
+            ->get();
+
+        return $userCountsByMonth;
     }
 
 
@@ -162,6 +198,17 @@ class AdminController extends Controller
 
         return view('admin.maps', ['users' => $users]);
     }
+
+    public function getUsersCountByProvince()
+    {
+        $userCountsByProvince = User::select('provinces.name as province_name', DB::raw('COUNT(users.id) as user_count'))
+            ->leftJoin('provinces', 'users.province_id', '=', 'provinces.id')
+            ->groupBy('provinces.name')
+            ->get();
+
+        return $userCountsByProvince;
+    }
+
 
 
 }

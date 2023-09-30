@@ -163,8 +163,8 @@
                         </form>
                     </div>
                     <div class="px-5 py-3">
-                        <a href="{{ route('books.show', ['book' => $book->id]) }}"> <h3 class="text-gray-700 uppercase">{{ $book->title }}</h3>View Details</a>
-                        <span class="text-gray-500 mt-2">${{ $book->price }}</span>
+                        <a href="{{ route('books.show', ['book' => $book->id]) }}"> <h3 class="text-black uppercase font-bold">{{ $book->title }}</h3></a>
+                        <span class="text-gray-700 font-semibold mt-2">${{ $book->price }}</span>
 
 
                     </div>

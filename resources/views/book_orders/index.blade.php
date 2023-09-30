@@ -8,7 +8,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="container mx-auto px-4 sm:px-8">
                     <div class="py-8">
-                        <div class="mb-4 text-2xl font-semibold text-blue-600">Order Details</div>
+                        <div class="mb-4 text-2xl font-semibold text-black">Order Details</div>
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <form action="{{ route('phonebook') }}" method="GET" class="mb-4">
                                 <div class="flex items-center">
@@ -83,18 +83,18 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @if ($order->status === 'pending')
-                                                <span class="bg-yellow-400 text-white px-2 py-1 rounded-full">{{ $order->status }}</span>
+                                                <span class="bg-yellow-500 text-white px-2 py-1 rounded-full">{{ $order->status }}</span>
                                             @else
-                                                <span class="bg-green-400 text-white px-2 py-1 rounded-full">{{ $order->status }}</span>
+                                                <span class="bg-green-500 text-white px-2 py-1 rounded-full">{{ $order->status }}</span>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @if ($order->status === 'pending')
-                                                <button data-order-id="{{ $order->id }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full deliver-button">
+                                                <button data-order-id="{{ $order->id }}" class="bg-primary hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full deliver-button">
                                                     Deliver
                                                 </button>
                                             @else
-                                                Delivered
+                                                <p class="text-black font-bold text-gray-700">Delivered</p>
                                             @endif
                                         </td>
                                     </tr>

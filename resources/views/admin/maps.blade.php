@@ -5,6 +5,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
+                <h1 class="text-black font-bold text-2xl "> Registered Users Location by:cities</h1>
+                <br>
                 <div class="container">
                     <div id="map" style="width: 100%; height: 700px;"></div>
 

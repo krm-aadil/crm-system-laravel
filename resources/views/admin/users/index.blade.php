@@ -5,8 +5,8 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-            <div class="container">
-                <div class="ml-5 my-5">
+            <div class="container mx-auto px-4 sm:px-8">
+            <div class="ml-5 my-5">
                     <a href="{{ route('users.create') }}" class="bg-primary hover:bg-neutral text-white font-bold py-2 px-4 rounded">Create User</a>
                 </div>
                 <form action="{{ route('users.index') }}" method="GET" class="mb-4">

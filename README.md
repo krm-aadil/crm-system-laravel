@@ -3,6 +3,7 @@
 ![Project Image](https://github.com/krm-aadil/test/blob/main/crm.png?raw=true)
 
 ## Table of Contents
+[Download PDF](URL_TO_YOUR_PDF)
 
 - [Introduction](#introduction)
 - [Features](#features)

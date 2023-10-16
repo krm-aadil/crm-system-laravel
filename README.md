@@ -2,9 +2,10 @@
 
 ![Project Image](https://github.com/krm-aadil/test/blob/main/crm.png?raw=true)
 
-## Table of Contents
-[Download PDF](URL_TO_YOUR_PDF)
+## PROJECT DOCUMENT
+[PROJECT DOCUMENT](https://github.com/krm-aadil/crm-system-laravel/blob/master/SSP2_CB010188.pdf)
 
+## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
 - [Getting Started](#getting-started)
